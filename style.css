@@ -1,0 +1,341 @@
+.loading-overlay {
+  position: fixed; /* Fixed positioning to cover the whole screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white; /* White background */
+  z-index: 9999; /* Ensure it's on top of all content */
+  opacity: 1;
+  transition: opacity 1s ease-out; /* Transition effect for fading out */
+}
+p {
+  letter-spacing: 0.05rem;
+  line-height: 2rem;
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+/* Initially hide the body content */
+body {
+  margin: 0;
+  padding: 0;
+  opacity: 0; /* Content is hidden initially */
+  transition: opacity 1s ease-out; /* Fade-in transition for content */
+  background-color: #fefefe;
+  overflow-x: hidden;
+}
+
+/* Make sure the body becomes visible immediately after the overlay starts fading out */
+body.visible {
+  opacity: 1; /* Fade-in the body content */
+}
+h2 {
+  font-size: 30pt;
+}
+.nadpis {
+  font-size: 60px;
+  letter-spacing: 5px;
+  text-shadow: 1px 2px 1px #222222;
+}
+.nadpis2 {
+  letter-spacing: 3px;
+  margin-bottom: 6%;
+  font-size: 2.25rem;
+  text-shadow: 1px 2px 1px #222222;
+}
+.podtext {
+  position: relative;
+  letter-spacing: 0.05rem;
+  margin-top: 15%;
+  font-size: 19px;
+  text-shadow: 1px 2px 1px #222222;
+  font-weight: 400;
+}
+.odstup {
+  margin-bottom: 10%;
+}
+.parallax-container {
+  background-image: url("images/background.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden; /* To hide anything that's out of bounds */
+  background-color: #d5834b;
+}
+.leftArrow {
+  color: #222222;
+}
+.navbar {
+  background-color: rgba(254, 254, 254, 0.8) !important;
+  opacity: 0.8;
+  transition: background 0.3s, opacity 0.3s ease, padding 0.3s ease;
+  padding: 1rem 2rem; /* Larger padding when not scrolled */
+}
+.navbar.shrink {
+  padding: 0.5rem 2rem; /* Smaller padding when scrolled */
+}
+.navbar.scrolled {
+  opacity: 1;
+  background: linear-gradient(to right, #fefefe, #d9d9d9);
+  border-bottom: 1px solid rgba(34, 34, 34, 0.302);
+}
+/* When the navbar is scrolled, we change the background color */
+.nav-link {
+  color: #222222;
+  transition: color 0.3s ease;
+  position: relative;
+}
+.nav-link:hover {
+  color: #614317;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px; /* Height of the line */
+  background-color: #d78000; /* Color of the line */
+  transform: scaleX(0); /* Initially hide the line */
+  transform-origin: bottom left;
+  transition: transform 0.3s ease; /* Animate the line appearance */
+}
+.nav-link:hover::after {
+  transform: scaleX(1); /* Show the line on hover */
+  transform-origin: bottom left;
+}
+
+.navbar-nav .nav-item .nav-link {
+  margin-right: 20px; /* Adjust this value to increase space */
+}
+.navbar-brand {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 3px;
+  color: #614317;
+  transition: color ease 0.3s, text-shadow 0.3s ease;
+}
+.navbar-brand:visited {
+  color: #614317;
+}
+.navbar-brand:hover {
+  color: #e46e1f;
+  text-shadow: 1px 2px 1px rgb(97, 67, 23, 0.5);
+}
+.navbar-brand:active {
+  color: #614317;
+}
+.fade-in {
+  opacity: 0;
+  transition: opacity 2s ease-out; /* Smooth fade-in transition */
+}
+/* State after intersection with the viewport */
+.fade-in-visible {
+  opacity: 1; /* Make the element fully visible */
+}
+.slide-in {
+  transform: translateX(-100%); /* Start off the screen */
+  transition: transform 0.5s ease-out, opacity 1s ease-out; /* Add transition for opacity */
+  opacity: 0; /* Initially hidden */
+}
+/* State when the element is in view */
+.slide-in-visible {
+  transform: translateX(0); /* Slide in to its original position */
+  opacity: 1; /* Make it fully visible */
+}
+.slide-in-left {
+  transform: translateX(100%); /* Start off the screen */
+  transition: transform 0.5s ease-out, opacity 1s ease-out; /* Add transition for opacity */
+  opacity: 0; /* Initially hidden */
+}
+/* State when the element is in view */
+.slide-in-left-visible {
+  transform: translateX(0); /* Slide in to its original position */
+  opacity: 1; /* Make it fully visible */
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.slide-down {
+  animation: slideDown 1s ease-out forwards;
+}
+.slide-up {
+  animation: slideUp 1s ease-out forwards;
+}
+.line-container {
+  position: relative;
+  margin: 20px 0; /* Space above and below the line */
+  height: 2px; /* Line height (thin line) */
+}
+
+.line-container::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Vertically center the line */
+  left: 50%; /* Start the line from the center */
+  transform: translateX(-50%); /* Offset to truly center it */
+  width: 0; /* Start with width of 0 (invisible) */
+  height: 2px; /* Line thickness */
+  background-color: #fff; /* Line color */
+  transition: width 1s ease-out; /* Animate width expansion */
+}
+
+.line-container.loaded::after {
+  width: 100%; /* Expand to full width from the center */
+}
+.omne {
+  padding-bottom: 5%;
+  background-color: #d9d9d980;
+  background: linear-gradient(to bottom, #d9d9d9, #acacac);
+}
+.omne-nadpis {
+  padding-top: 5%;
+  justify-content: center;
+  background-color: #d9d9d9;
+}
+.omne-nadpis2 {
+  padding-top: 2.5%;
+  padding-bottom: 2.5%;
+  justify-content: center;
+}
+.omne-nadpis3 {
+  padding-top: 5%;
+  justify-content: center;
+}
+.omne-text {
+  padding-top: 3%;
+}
+.kodeon-text {
+  padding-top: 2%;
+}
+.cont {
+  display: grid;
+}
+.mujprofil {
+  justify-content: center;
+  margin-left: 25%;
+  margin-top: 25%;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+}
+.pozadi-nadpis {
+  background-color: #d9d9d980;
+}
+.pozadi-nadpis2 {
+  background-color: #fefefe;
+}
+.pozadi-nadpis3 {
+  background-color: #d9d9d9;
+}
+.pozadi {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.port-one {
+  background-color: #fefefe;
+}
+.port-two {
+  background-color: #d9d9d9;
+  background: linear-gradient(to bottom, #d9d9d9, #acacac);
+}
+.port-three {
+  background-color: #fefefe;
+}
+.text-kodeon {
+  padding-top: 1%;
+  max-width: 50%;
+  margin-bottom: 10%;
+}
+.kodeon-obr {
+  width: 600px;
+  height: 300px;
+  margin: 1rem;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  transition: 0.3s ease-out;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kodeon-obr:hover {
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+.box {
+  margin-bottom: 5rem;
+}
+.box2 {
+  padding-bottom: 5rem;
+}
+.box3 {
+  padding-bottom: 3rem;
+  padding-top: 3rem;
+}
+.kontakt-pozadi {
+  background-color: #e46e1f;
+}
+.app-obr {
+  height: 400px;
+  margin: 0.5rem;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  transition: 0.3s ease-out;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.app-obr:hover {
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+.kristus-obr {
+  width: 600px;
+  height: 400px;
+  margin: 0.5rem;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  transition: 0.3s ease-out;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.kristus-obr:hover {
+  transform: scale(1.05);
+  opacity: 0.6;
+}
+.mailpicture {
+  width: 50px;
+  margin-top: 1rem;
+  height: 50px;
+  opacity: 75%;
+}
+.kontakt-hlavni {
+  margin-bottom: 1rem;
+}
+.modal-backdrop.in {
+  background: rgba(0, 0, 0, 0.5);
+}
